@@ -2,7 +2,7 @@ import { formatDate } from "../../lib/formatDate"
 
 export default function ChannelPreview({channel}) {
     return (
-        <>
+        <div className="flex flex-col gap-4">
             <div className="flex flex-col items-center">
                 <h1 className="text-xl">{channel.title}</h1>
                 <span
@@ -18,6 +18,6 @@ export default function ChannelPreview({channel}) {
                     </li>
                 ))}
             </ul>
-        </>
+        </div>
     )
 }
