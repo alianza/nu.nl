@@ -1,0 +1,38 @@
+{
+  "title": "NU - Algemeen",
+  "link": "https://www.nu.nl/algemeen",
+  "description": "Het laatste nieuws het eerst op NU.nl",
+  "atom:link": {
+    "_attributes": {
+      "href": "https://www.nu.nl/rss/Algemeen",
+      "rel": "self"
+    }
+  },
+  "language": "nl-nl",
+  "copyright": "Copyright (c) 2021, NU",
+  "lastBuildDate": "Thu, 09 Dec 2021 13:48:51 +0100",
+  "ttl": "60",
+  "atom:logo": "https://www.nu.nl/algemeenstatic/img/atoms/images/logos/rss-logo-250x40.png",
+  "item": [
+    {
+      "title": "Gasprijs gaat mede door lagere temperaturen weer hard omhoog",
+      "link": "https://www.nu.nl/economie/6172199/gasprijs-gaat-mede-door-lagere-temperaturen-weer-hard-omhoog.html",
+      "description": "De gasprijs is weer op een niveau van boven de 100 euro per megawattuur beland op de Europese handelsmarkt. Begin oktober piekte de prijs op 116 euro, waarna die door een zachte oktobermaand weer tot bedaren was gekomen. In tegenstelling tot een paar maanden terug zijn de hogere gasprijzen nu wél ingecalculeerd in de prijzen die aan de consument in rekening worden gebracht. Dat zegt Ben Woldring van Gaslicht.com.",
+      "pubDate": "Thu, 09 Dec 2021 12:42:51 +0100",
+      "guid": "https://www.nu.nl/-/6172199/",
+      "enclosure": {
+        "_attributes": {
+          "length": "0",
+          "type": "image/jpeg",
+          "url": "https://media.nu.nl/m/rayxwhia0mx5_sqr256.jpg/gasprijs-gaat-mede-door-lagere-temperaturen-weer-hard-omhoog.jpg"
+        }
+      },
+      "category": [
+        "Economie",
+        "Algemeen"
+      ],
+      "dc:creator": "Eva Schouten",
+      "dc:rights": "copyright photo: GettyImages"
+    }
+  ]
+}

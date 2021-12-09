@@ -1,0 +1,68 @@
+@import 'styles/variables';
+@import 'styles/sizes';
+
+body {
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    color: var(--text-primary);
+
+    #nprogress {
+        position: relative;
+        z-index: 9999999;
+
+        .spinner {
+            top: 0;
+            right: 0;
+            padding: 15px;
+            background-color: var(--secondary);
+            pointer-events: auto;
+            box-shadow: 0 -12px 6px 6px var(--secondary);
+
+            .spinner-icon {
+                border-width: 9px;
+                animation-duration: 750ms;
+                animation-timing-function: ease-in-out;
+            }
+        }
+    }
+}
+
+a, button.link {
+    text-decoration: underline;
+    font-style: italic;
+    text-decoration-color: transparent;
+    transition: text-decoration-color .35s ease-in-out;
+    color: inherit;
+    border: none;
+    background-color: transparent;
+
+    &:hover {
+        transition: text-decoration-color .1s ease-in-out;
+        text-decoration-color: inherit;
+    }
+}
+
+#app {
+    position: relative;
+    min-height: 100vh;
+    background-color: var(--accent-0);
+    transition: background-color .35s ease-in-out;
+    box-sizing: content-box;
+    color: var(--text-primary);
+
+    & #content {
+        padding: calc(var(--header) + 1em) 1em calc(var(--footer) + 1em);
+    }
+
+    @import 'styles/tooltip';
+}
+
+@media (hover: none) {
+    a, button.link {
+        text-decoration-color: inherit;
+        font-style: normal;
+    }
+}
+
+@import 'styles/scrollbar';
