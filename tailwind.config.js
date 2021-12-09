@@ -19,6 +19,7 @@ module.exports = {
       },
       boxShadow: {
         '3xl': '0 0 6px rgba(0, 0, 0, 0.5)',
+        'allround': '0 0 6px rgba(0, 0, 0, 0.2)',
       },
       screens: {
         'desktop': '900px', //var(--desktop)

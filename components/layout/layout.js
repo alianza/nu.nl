@@ -1,15 +1,36 @@
 import Head from "next/head"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
-export default function Layout({ children }) {
+const darkModeKey = "darkMode"
+
+export default function Layout({ children, buildTime }) {
+    const [theme, setTheme] = useState('')
 
     useEffect(() => {
-        document.body.dataset.theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : ''
-    }, [])
+        const matchDarkMedia = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)')
+        const savedTheme = localStorage.getItem(darkModeKey)
 
-    const themeMode = () => {
-        document.body.dataset.theme = document.body.dataset.theme === 'dark' ? '' : 'dark'
+        if (savedTheme) { // If the user has a saved theme, use it
+            document.body.dataset.theme = savedTheme
+            setTheme(savedTheme)
+
+            matchDarkMedia.removeEventListener('change', onColorSchemeChange)
+        } else { // If no saved theme, use the browser's default and listen for operating system changes
+            document.body.dataset.theme = matchDarkMedia.matches ? 'dark' : 'light'
+            setTheme(document.body.dataset.theme)
+
+            matchDarkMedia.addEventListener('change', onColorSchemeChange)
+        }
+    }, [theme])
+
+    const changeTheme = () => {
+        const newTheme = document.body.dataset.theme === 'dark' ? 'light' : 'dark'
+        document.body.dataset.theme = newTheme
+        localStorage.setItem(darkModeKey, newTheme)
+        setTheme(newTheme)
     }
+
+    const onColorSchemeChange = (e) => { document.body.dataset.theme = e.matches ? 'dark' : 'light' } // Prefers light/dark theme
 
     return (
     <div id="app">
@@ -22,15 +43,17 @@ export default function Layout({ children }) {
             <link rel="manifest" href="/manifest.json"/>
         </Head>
 
-        <header className="fixed bg-accent-0 w-full h-header top-0 p-4 shadow flex justify-between items-center">
+        <header className="fixed w-full h-header top-0 p-4 shadow flex justify-between items-center">
             <h1 className="text-xl">Nu.nl Nieuws</h1>
-            <button onClick={themeMode}>Dark/light</button>
+            <button onClick={changeTheme} className="hover:scale-110 transition-transform"
+                    title={`Change to ${theme === 'light' ? 'Dark' : 'Light'} theme`}>{theme === 'light' ? '🌙' : '☀'}</button>
         </header>
 
         <main id="content">{children}</main>
 
-        <footer className="absolute w-full bottom-0 h-16 p-4 shadow-3xl flex justify-between items-center">
+        <footer className="absolute w-full bottom-0 h-16 p-4 shadow-allround flex justify-between items-center">
             <span>Author: <a href="https://jwvbremen.nl" target="_blank" rel="noreferrer">Jan-Willem van Bremen</a></span>
+            <span>{new Date(buildTime).toLocaleString()}</span>
         </footer>
 
     </div>)
