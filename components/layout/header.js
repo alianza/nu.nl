@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 
 const darkModeKey = "darkMode"
 
-export default function Header(props) {
+export default function Header() {
     const [theme, setTheme] = useState('')
 
     useEffect(() => {
@@ -34,6 +34,6 @@ export default function Header(props) {
     return <header className="fixed w-full h-header top-0 p-4 shadow flex justify-between items-center">
         <h1 className="text-xl">Nu.nl Nieuws</h1>
         <button onClick={changeTheme} className="hover:scale-110 transition-transform"
-                title={`Change to ${props.theme === "light" ? "Dark" : "Light"} theme`}>{props.theme === "light" ? "🌙" : "☀"}</button>
+                title={`Change to ${theme === "light" ? "Dark" : "Light"} theme`}>{theme === "light" ? "🌙" : "☀"}</button>
     </header>
 }
