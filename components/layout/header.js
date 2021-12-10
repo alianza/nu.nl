@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import Link from "next/link"
 
 const darkModeKey = "darkMode"
 
@@ -9,7 +10,7 @@ export default function Header() {
         const matchDarkMedia = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)')
         const savedTheme = localStorage.getItem(darkModeKey)
 
-        if (savedTheme) { // If the user has a saved theme, use it
+        if (savedTheme) { // If the user has a saved theme, use it and remove event listener
             document.body.dataset.theme = savedTheme
             setTheme(savedTheme)
 
@@ -31,9 +32,9 @@ export default function Header() {
 
     const onColorSchemeChange = (e) => { document.body.dataset.theme = e.matches ? 'dark' : 'light' } // Prefers light/dark theme
 
-    return <header className="fixed w-full h-header top-0 p-4 shadow flex justify-between items-center">
-        <h1 className="text-xl">Nu.nl Nieuws</h1>
-        <button onClick={changeTheme} className="hover:scale-110 transition-transform"
+    return <header className="fixed w-full h-header top-0 p-4 shadow flex justify-between items-center bg-accent-0 z-20">
+        <Link href='/'><a><h1 className="text-xl not-italic">Nu.nl Nieuws</h1></a></Link>
+        <button onClick={changeTheme} className="hover:scale-110 transition-transform p-4 m-[-1em]"
                 title={`Change to ${theme === "light" ? "Dark" : "Light"} theme`}>{theme === "light" ? "🌙" : "☀"}</button>
     </header>
 }
