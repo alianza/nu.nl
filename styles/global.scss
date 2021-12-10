@@ -12,12 +12,12 @@ body {
         z-index: 9999999;
 
         .spinner {
-            top: 0;
-            right: 0;
-            padding: 15px;
-            background-color: var(--secondary);
+            top: .5em;
+            right: .2em;
+            padding: 1em;
+            background-color: var(--accent-0);
             pointer-events: auto;
-            box-shadow: 0 -12px 6px 6px var(--secondary);
+            box-shadow: 0 -12px 6px 6px var(--accent-0);
 
             .spinner-icon {
                 border-width: 9px;
@@ -53,6 +53,8 @@ a, button.link {
 
     & #content {
         padding: calc(var(--header) + 1em) 1em calc(var(--footer) + 1em);
+        max-width: 88em;
+        margin: 0 auto;
     }
 
     @import 'styles/tooltip';
