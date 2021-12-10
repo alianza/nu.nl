@@ -16,9 +16,6 @@ export async function getStaticProps() {
 }
 
 export default function Home({ channels,  buildTime }) {
-
-    console.log('buildTime:' , new Date(buildTime).toLocaleString('nl'))
-
     return (
         <div className="flex flex-col items-center gap-8">
             {channels.map(channel => ( <ChannelPreview key={channel.title} channel={channel} /> ))}
