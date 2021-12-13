@@ -5,7 +5,7 @@ import Main from "./main"
 
 export default function Layout({ children, buildTime }) {
     return (
-    <div id="app" className='relative min-h-100vh bg-accent-0 transition-colors text-text-primary'>
+    <div id="app" className='relative min-h-screen bg-accent-0 transition-colors text-text-primary'>
         <Head>
             <title>Nu.nl Feeds - Laatste nieuws</title>
             <link rel="icon" href="/favicon.ico"/>
