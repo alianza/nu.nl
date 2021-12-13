@@ -2,12 +2,12 @@ import { NuService } from "../../lib/services/nuService"
 import ChannelPreview from "../../components/channelPreview/channelPreview"
 
 export async function getStaticProps() {
-    const algemeen = await NuService.getAlgemeen()
+    const economie = await NuService.getEconomie()
 
     return {
         props: {
             channels: [
-                algemeen
+                economie
             ],
         },
         revalidate: 120

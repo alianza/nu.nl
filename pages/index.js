@@ -1,5 +1,6 @@
 import { NuService } from "../lib/services/nuService"
 import ChannelPreview from "../components/channelPreview/channelPreview"
+import { useEffect } from "react"
 
 export async function getStaticProps() {
     const algemeen = await NuService.getAlgemeen('4')
@@ -29,13 +30,12 @@ export async function getStaticProps() {
                 achterklap,
                 podcast
             ],
-            buildTime: new Date().toString()
         },
         revalidate: 120
     }
 }
 
-export default function Home({ channels,  buildTime }) {
+export default function Home({ channels }) {
     return (
         <div className="flex flex-col items-center gap-8">
             {channels.map(channel => ( <ChannelPreview key={channel.title} channel={channel} /> ))}
