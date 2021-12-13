@@ -1,10 +1,11 @@
 import Head from "next/head"
 import Header from "./header"
 import Footer from "./footer"
+import Main from "./main"
 
 export default function Layout({ children, buildTime }) {
     return (
-    <div id="app">
+    <div id="app" className='relative min-h-100vh bg-accent-0 transition-colors text-text-primary'>
         <Head>
             <title>Nu.nl Feeds - Laatste nieuws</title>
             <link rel="icon" href="/favicon.ico"/>
@@ -17,7 +18,7 @@ export default function Layout({ children, buildTime }) {
 
         <Header/>
 
-        <main id="content">{children}</main>
+        <Main>{children}</Main>
 
         <Footer buildTime={buildTime}/>
 

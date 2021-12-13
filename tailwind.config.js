@@ -4,6 +4,8 @@ module.exports = {
     extend: {
       colors: {
         'theme': 'var(--theme)',
+        'text-primary': 'var(--text-primary)',
+        'text-secondary': 'var(--text-secondary)',
         'accent-0': 'var(--accent-0)',
         'accent-1': 'var(--accent-1)',
         'accent-2': 'var(--accent-2)',

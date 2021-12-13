@@ -1,70 +1,12 @@
-@import 'styles/variables';
-@import 'styles/sizes';
+@import 'mixins/variables';
+@import 'mixins/sizes';
 
-body {
-    padding: 0;
-    margin: 0;
-    overflow-x: hidden;
-    color: var(--text-primary);
+@import 'mixins/loader';
 
-    #nprogress {
-        position: relative;
-        z-index: 9999999;
-
-        .spinner {
-            top: .5em;
-            right: .2em;
-            padding: 1em;
-            background-color: var(--accent-0);
-            pointer-events: auto;
-            box-shadow: 0 -12px 6px 6px var(--accent-0);
-
-            .spinner-icon {
-                border-width: 9px;
-                animation-duration: 750ms;
-                animation-timing-function: ease-in-out;
-            }
-        }
-    }
-}
-
-a, button.link {
-    text-decoration: underline;
-    font-style: italic;
-    text-decoration-color: transparent;
-    transition: text-decoration-color .35s ease-in-out;
-    color: inherit;
-    border: none;
-    background-color: transparent;
-
-    &:hover {
-        transition: text-decoration-color .1s ease-in-out;
-        text-decoration-color: inherit;
-    }
-}
+@import 'mixins/links';
 
 #app {
-    position: relative;
-    min-height: 100vh;
-    background-color: var(--accent-0);
-    transition: background-color .35s ease-in-out;
-    box-sizing: content-box;
-    color: var(--text-primary);
-
-    & #content {
-        padding: calc(var(--header) + 1em) 1em calc(var(--footer) + 1em);
-        max-width: 88em;
-        margin: 0 auto;
-    }
-
-    @import 'styles/tooltip';
+    @import 'mixins/tooltip';
 }
 
-@media (hover: none) {
-    a, button.link {
-        text-decoration-color: inherit;
-        font-style: normal;
-    }
-}
-
-@import 'styles/scrollbar';
+@import 'mixins/scrollbar';
