@@ -1,9 +1,14 @@
 @import 'mixins/variables';
 @import 'mixins/sizes';
-
 @import 'mixins/loader';
-
 @import 'mixins/links';
+
+body {
+    &.scroll-disabled {
+        overflow: hidden;
+        margin-right: 12px;
+    }
+}
 
 #app {
     @import 'mixins/tooltip';
