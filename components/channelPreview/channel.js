@@ -5,9 +5,12 @@ export default function Channel({channel, openStory}) {
     return (
         <div className="flex flex-col gap-4">
             <div className="flex flex-col items-center">
-                <Link href={channel.link.substr(channel.link.lastIndexOf('/'), channel.link.length)}><a>
-                    <h1 className="text-2xl">{channel.title}</h1>
-                </a></Link>
+                <Link href={channel.link.substr(channel.link.lastIndexOf('/'), channel.link.length)}>
+                    <a className='relative'>
+                        <span id={channel.title.replace('NU - ', '')}  className="absolute -top-24"/>
+                        <h1 className="text-2xl">{channel.title}</h1>
+                    </a>
+                </Link>
                 <span
                     className="text-accent-6">
                     Laatste data: {new Date(channel.lastBuildDate).toLocaleTimeString('nl')}

@@ -2,6 +2,7 @@ import { NuService } from "../lib/services/nuService"
 import Channel from "../components/channelPreview/channel"
 import { useState } from "react"
 import StoryDialog from "../components/storyDialog/storyDialog"
+import QuickTabs from "../components/quickTabs/quickTabs"
 
 export async function getStaticProps() {
     const algemeen = await NuService.getAlgemeen('4')
@@ -43,9 +44,12 @@ export default function Home({ channels }) {
     return (
         <div className="flex flex-col items-center gap-8">
 
-            {channels.map(channel => ( <Channel key={channel.title} openStory={setStory} channel={channel}/> ))}
+            <QuickTabs channels={channels} />
+
+            {channels.map(channel => (<Channel key={channel.title} openStory={setStory} channel={channel}/>))}
 
             <StoryDialog story={story}/>
+
         </div>
     )
 }
