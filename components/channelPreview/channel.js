@@ -1,26 +1,34 @@
 import Link from 'next/link'
 import Story from '../story/story'
+import { formatDate, months } from "../../lib/formatDate"
+import { formatTime } from "../../lib/formatTime"
 
 export default function Channel({channel, openStory}) {
+    const channelDate = new Date(channel.lastBuildDate)
+    let formattedDate = formatDate(channelDate)
+
+    if (!months.some(value => formattedDate.includes(value))) { // If date doesn't contain month name, add time
+        formattedDate = `${formattedDate} om: ${formatTime(channelDate)}`
+    }
+
     return (
         <div className="flex flex-col gap-4">
             <div className="flex flex-col items-center">
                 <Link href={channel.link.substr(channel.link.lastIndexOf('/'), channel.link.length)}>
-                    <a className='relative'>
-                        <span id={channel.title.replace('NU - ', '')}  className="absolute -top-24"/>
+                    <a className='relative group flex items-center'>
+                        <span id={channel.title.replace('NU - ', '')} className="absolute -top-24"/>
                         <h1 className="text-2xl">{channel.title}</h1>
+                        <span className='absolute -right-6 text-2xl transition-transform group-hover:translate-x-2'>→</span>
                     </a>
                 </Link>
                 <span
                     className="text-accent-6">
-                    Laatste data: {new Date(channel.lastBuildDate).toLocaleTimeString('nl')}
+                    Laatste data: {formattedDate}
                 </span>
             </div>
 
             <ul className="flex flex-wrap justify-center gap-8 tablet:gap-4 w-full">
-                {channel.item.map(item => (
-                    <Story openStory={openStory} key={item.title} item={item}/>
-                ))}
+                {channel.item.map(item => <Story openStory={openStory} key={item.title} item={item}/> )}
             </ul>
         </div>
     )

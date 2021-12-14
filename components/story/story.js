@@ -1,12 +1,13 @@
 import { formatDate } from "../../lib/formatDate"
 import NewTabIcon from "../newTabIcon/newTabIcon"
+import { formatTime } from "../../lib/formatTime"
 
 export default function Story(props) {
     const storyDate = new Date(props.item.pubDate)
-    const dateString = `${formatDate(props.item.pubDate)} om: ${("0" + storyDate.getHours()).slice(-2)}:${("0" + storyDate.getMinutes()).slice(-2)}`
+    const dateString = `${formatDate(props.item.pubDate)} om: ${formatTime(storyDate)}`
 
     return(
-        <li style={{flexBasis: "16em"}} className="flex flex-col gap-2 flex-grow relative">
+        <li tabIndex='0' className="flex flex-col gap-2 flex-grow relative basis-64 rounded-lg outline-offset-4 outline-accent-6 focus:outline focus:outline-1 active:outline active:outline-1">
             <div style={{backgroundImage: `url(${props.item.enclosure._attributes.url})`}}
                  className="text-white text-xl bg-cover bg-center bg-no-repeat relative z-10 p-2 rounded-t-lg">
                 <a className="after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-black/50 after:z-[-1] after:rounded-t-lg"
