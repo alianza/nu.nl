@@ -3,6 +3,15 @@
 }
 
 .dialog {
+    background:
+            linear-gradient(var(--accent-1) 33%, rgba(255,255,255, 0)),
+            linear-gradient(rgba(255,255,255, 0), var(--accent-1) 66%) 0 100%,
+            radial-gradient(farthest-side at 50% 0, rgba(34,34,34, 0.5), rgba(0,0,0,0)),
+            radial-gradient(farthest-side at 50% 100%, rgba(34,34,34, 0.5), rgba(0,0,0,0)) 0 100%;
+    background-repeat: no-repeat;
+    background-attachment: local, local, scroll, scroll;
+    background-size: 100% 39px, 100% 39px, 100% 24px, 100% 24px;
+
     @apply fixed p-4 max-h-[90%] left-1/2 top-1/2 w-11/12 mobile:w-4/5 max-w-3xl bg-accent-1 rounded-lg shadow-lg overflow-auto z-30;
 
     .title {

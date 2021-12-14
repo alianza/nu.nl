@@ -69,7 +69,7 @@ export default function StoryDialog({story}) {
     }, [story])
 
     function closeStory() {
-        router.push(currentPage)
+        router.push(currentPage, undefined, { shallow: true })
         setOpen(false)
         document.body.classList.remove('scroll-disabled')
     }
