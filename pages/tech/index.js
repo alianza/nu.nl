@@ -29,7 +29,7 @@ export default function Home({ channels }) {
 
             {channels.map(channel => ( <Channel key={channel.title} openStory={setStory} channel={channel}/> ))}
 
-            <StoryDialog story={story}/>
+            <StoryDialog story={story} unsetStory={setStory}/>
         </div>
     )
 }

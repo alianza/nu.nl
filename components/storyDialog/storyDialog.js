@@ -2,21 +2,25 @@ import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import styles from "./storyDialog.module.scss"
 
-export default function StoryDialog({story}) {
+export default function StoryDialog({story, unsetStory}) {
     const router = useRouter()
     const [content, setContent] = useState(null)
     const [open, setOpen] = useState(false)
     const [currentPage] = useState(router.asPath)
 
     useEffect(() => {
-        router.events.on('routeChangeStart', e => {
+        const handleRouteChange = (e) => {
             if (e.includes('?artikel=')) {
                 document.querySelector(`a[href*='${e.substring(e.indexOf('?artikel=') + '?artikel='.length, e.length)}']`)?.click()
             } else {
                 setOpen(false)
                 document.body.classList.remove('scroll-disabled')
             }
-        })
+        }
+
+        router.events.on('routeChangeStart', handleRouteChange)
+
+        return () => { router.events.off('routeChangeStart', handleRouteChange) }
     }, [])
 
     useEffect(() => {
@@ -72,6 +76,7 @@ export default function StoryDialog({story}) {
         router.push(currentPage, undefined, { shallow: true })
         setOpen(false)
         document.body.classList.remove('scroll-disabled')
+        unsetStory(null)
     }
 
     return ( <>

@@ -46,9 +46,9 @@ export default function Home({ channels }) {
 
             <QuickTabs channels={channels} />
 
-            {channels.map(channel => (<Channel key={channel.title} openStory={setStory} channel={channel}/>))}
+            {channels.map(channel => (<Channel key={channel.title} openStory={story => {setStory(story)}} channel={channel}/>))}
 
-            <StoryDialog story={story}/>
+            <StoryDialog story={story} unsetStory={setStory}/>
 
         </div>
     )
