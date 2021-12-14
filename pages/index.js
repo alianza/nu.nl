@@ -6,6 +6,7 @@ import QuickTabs from "../components/quickTabs/quickTabs"
 
 export async function getStaticProps() {
     const algemeen = await NuService.getAlgemeen('4')
+    const anders = await NuService.getAnders('4')
     const opmerkelijk = await NuService.getOpmerkelijk('4')
     const wetenschap = await NuService.getWetenschap('4')
     const gezondheid = await NuService.getGezondheid('4')
@@ -21,6 +22,7 @@ export async function getStaticProps() {
         props: {
             channels: [
                 algemeen,
+                anders,
                 opmerkelijk,
                 wetenschap,
                 gezondheid,
