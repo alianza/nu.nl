@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Story from '../story/story'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './channelPreview.module.scss'
 import { useRouter } from 'next/router'
 
@@ -9,9 +9,13 @@ export default function ChannelPreview({channel}) {
     const [content, setContent] = useState(null)
     const router = useRouter()
 
-    const handleOpenStory = async (storyObj) => { 
-        router.push({ pathname: router.asPath }, undefined, { shallow: true })
-        
+    useEffect(() => {
+        router.events.on('routeChangeStart', () => { setOpen(false) })
+    }, [])
+
+    const handleOpenStory = async (storyObj) => {
+        router.push(`/?artikel`, undefined, { shallow: true })
+
         const storyHTML = await fetch('https://whatever.fly.dev/get?url=' + encodeURIComponent(storyObj.link))
         .then(response => response.json())
         .then(response => { return response })
@@ -49,6 +53,7 @@ export default function ChannelPreview({channel}) {
     }
 
     function closeStory() {
+        router.back()
         setOpen(false)
         document.body.classList.remove('scroll-disabled')
     }
