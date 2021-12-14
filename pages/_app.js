@@ -6,21 +6,12 @@ import { useDarkThemeListener } from "../lib/eventListeners"
 import { useState } from "react"
 import Head from "next/head"
 
-export async function getStaticProps() {
-    return {
-        props: {
-            buildTime: new Date().toString()
-        },
-        revalidate: 120
-    }
-}
-
 function MyApp({ Component, pageProps }) {
     const [darkTheme, setDarkTheme] = useState(false)
 
     useDarkThemeListener(setDarkTheme)
 
-  return(
+    return(
     <Layout buildTime={pageProps.buildTime}>
         <Head>
             <meta name="theme-color" content={darkTheme ? '#000' : '#fff'}/>
