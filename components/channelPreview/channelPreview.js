@@ -20,30 +20,37 @@ export default function ChannelPreview({channel}) {
 
         const story = doc.querySelector('[data-type="article.body"]')
 
-        doc.querySelectorAll('[data-type="video"]').forEach(video => { video.remove() })
-        doc.querySelector('[data-type="call.to.action"]')?.remove()
-        doc.querySelectorAll('div.timeline-block-wrapper').forEach(e => { e.style.marginTop = '1em' })
-        doc.querySelector('div.timeline-footer')?.remove()
-        doc.querySelectorAll('span.date').forEach(e => { e.style.fontStyle = 'italic'; e.parentElement.style.textAlign = 'right' })
-        doc.querySelectorAll('div.consent_required').forEach(e => { e.remove() })
-        
-        console.log(story)
-        // console.log(story?.parentNode)
-        console.log(story?.firstElementChild)
-        // console.log(story?.firstChild)
-
-        if (story?.firstElementChild) {
-            story.firstElementChild.insertAdjacentHTML('afterEnd' ,`<a style="display: block; margin-top: .5em;" href="${storyObj.link}" target="_blank" rel="noreferrer">Lees volledig bericht...</a>`)
-            story.firstElementChild.insertAdjacentHTML('beforeBegin' ,`<h1 style="margin-top: 0;">${storyObj.title}</h1>`)
-        }
-        
         if (story) {
+
+            story.querySelectorAll('[data-type="video"]').forEach(video => { video.remove() })
+            story.querySelector('[data-type="call.to.action"]')?.remove()
+            story.querySelectorAll('div.timeline-block-wrapper').forEach(e => { e.style.marginTop = '1em' })
+            story.querySelector('div.timeline-footer')?.remove()
+            story.querySelectorAll('span.date').forEach(e => { e.style.fontStyle = 'italic'; e.parentElement.style.textAlign = 'right' })
+            story.querySelectorAll('div.consent_required').forEach(e => { e.remove() })
+            story.querySelectorAll('div[data-type="followtag"]').forEach(e => { e.remove() })
+            story.querySelectorAll('img[data-src*="media.nu.nl"]').forEach(e => { e.src = e.getAttribute('data-src'); e.style.margin = "1em auto" })
+            story.querySelectorAll('a[href^="/"]').forEach(e => { e.setAttribute('href', `https://nu.nl${e.getAttribute('href')}`) })
+
+            // console.log(story)
+            // console.log(story?.firstElementChild)
+
+            if (story?.firstElementChild) {
+                story.firstElementChild.insertAdjacentHTML('afterend' ,`<a class='${styles.readFullStory}' href="${storyObj.link}" target="_blank" rel="noreferrer">Lees volledig bericht...</a>`)
+                story.firstElementChild.insertAdjacentHTML('beforebegin' ,`<h1 class='${styles.title}' style="background-image: url('${storyObj.enclosure._attributes.url}')">${storyObj.title}</h1>`)
+            }
+
             setContent(story.innerHTML)
-            setOpen(true)
         } else {
-            setContent(`<p style="margin-top: 0; margin-bottom: .2em;">Geen content gevonden...</p> <a style="display: block;" href="${storyObj.link}" target="_blank" rel="noreferrer">Lees volledig bericht...</a>`)
-            setOpen(true)
+            setContent(`<h1 class='${styles.noContentFound}'>Geen content gevonden...</h1> <a href="${storyObj.link}" target="_blank" rel="noreferrer">Lees volledig bericht...</a>`)
         }
+        setOpen(true)
+        document.body.classList.add('scroll-disabled')
+    }
+
+    function closeStory() {
+        setOpen(false)
+        document.body.classList.remove('scroll-disabled')
     }
 
     return (
@@ -59,17 +66,17 @@ export default function ChannelPreview({channel}) {
             </div>
 
             <ul className="flex flex-wrap justify-center gap-8 tablet:gap-4 w-full">
-                {channel.item.map((item, index) => (
+                {channel.item.map(item => (
                     <Story openStory={handleOpenStory} key={item.title} item={item}/>
                 ))}
             </ul>
             {open && 
             <>
-                <div className={`fixed inset-0 z-20 bg-black/50 text-text-primary cursor-pointer`} onClick={() => { setOpen(false) }} />
+                <div className={`fixed inset-0 z-20 bg-black/50 text-text-primary cursor-pointer`} onClick={() => closeStory()} />
 
-            <div className={`${styles.dialog} fixed h-[90%] left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-full mobile:w-4/5 max-w-3xl bg-accent-1 rounded-lg shadow-lg p-4 overflow-auto z-30`}>
-                    <button className='block ml-auto transition-transform hover:scale-125' onClick={() => setOpen(false)}>✕</button>
-                    <div dangerouslySetInnerHTML={{__html: content }} />
+            <div className={`${styles.dialog} -translate-y-1/2 -translate-x-1/2`}>
+                    <button className='block ml-auto mb-3 transition-transform hover:scale-125' onClick={() => closeStory()}>✕</button>
+                <div dangerouslySetInnerHTML={{__html: content }} />
             </div>
             </>
             }
