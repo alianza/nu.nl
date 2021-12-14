@@ -1,7 +1,8 @@
 import { NuService } from "../../lib/services/nuService"
-import ChannelPreview from "../../components/channelPreview/channelPreview"
+import Channel from "../../components/channelPreview/channel"
 import { useState } from "react"
 import StoryDialog from "../../components/storyDialog/storyDialog"
+import Head from "next/head"
 
 export async function getStaticProps() {
     const economie = await NuService.getEconomie()
@@ -22,7 +23,11 @@ export default function Home({ channels }) {
 
     return (
         <div className="flex flex-col items-center gap-8">
-            {channels.map(channel => ( <ChannelPreview key={channel.title} openStory={setStory} channel={channel}/> ))}
+            <Head>
+                <title>Nu.nl Feeds - {channels[0].title}</title>
+            </Head>
+
+            {channels.map(channel => ( <Channel key={channel.title} openStory={setStory} channel={channel}/> ))}
 
             <StoryDialog story={story}/>
         </div>

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Story from '../story/story'
 
-export default function ChannelPreview({channel, openStory}) {
+export default function Channel({channel, openStory}) {
     return (
         <div className="flex flex-col gap-4">
             <div className="flex flex-col items-center">
