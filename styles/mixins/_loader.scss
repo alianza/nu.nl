@@ -1,21 +1,13 @@
 body {
     #nprogress {
         position: relative;
-        z-index: 9999999;
+        z-index: 20;
 
         .spinner {
-            top: .5em;
-            right: .2em;
+            top: .45em;
+            right: .15em;
             padding: 1em;
-            background-color: var(--accent-0);
-            pointer-events: auto;
-            box-shadow: 0 -12px 6px 6px var(--accent-0);
-
-            .spinner-icon {
-                border-width: 9px;
-                animation-duration: 750ms;
-                animation-timing-function: ease-in-out;
-            }
+            pointer-events: none;
         }
     }
 }
