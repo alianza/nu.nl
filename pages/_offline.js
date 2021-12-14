@@ -1,7 +1,7 @@
 export default () => (
-    <div>
-        <h1>Oops, your offline! 📡</h1>
-        <h2>Please reconnect the network!</h2>
+    <div className='text-center'>
+        <h1 className='text-3xl'>Oops, you're offline! 📡</h1>
+        <h2 className='text-xl'>Please reconnect the network!</h2>
         <a href="/">Reload 🔁</a>
     </div>
 )
