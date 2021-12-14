@@ -79,7 +79,7 @@ export default function StoryDialog({story}) {
                 <div className={`fixed inset-0 z-20 bg-black/50 text-text-primary cursor-pointer`} onClick={closeStory}/>
                 <div className={`${styles.dialog} -translate-y-1/2 -translate-x-1/2`}>
                     <button className="block ml-auto mb-3 transition-transform hover:scale-125" onClick={closeStory}>✕</button>
-                    <div dangerouslySetInnerHTML={{__html: content}}/>
+                    <div dangerouslySetInnerHTML={{__html: content.toString()}}/>
                 </div>
             </>}
         </>
