@@ -26,7 +26,7 @@
 
         &:after {
             @include horizontalRuler;
-            margin-top: 1rem;
+            @apply mt-4;
         }
     }
 
@@ -35,7 +35,7 @@
 
         &:before {
             @include horizontalRuler;
-            margin-bottom: 1rem;
+            @apply mb-4;
         }
     }
 
@@ -60,16 +60,14 @@
     }
 
     .readFullStory {
-        display: block;
-        margin-top: .5em;
+        @apply block mt-2;
     }
 
     .noContentFound {
-        margin-top: 0;
-        margin-bottom: .2em;
+        @apply mt-0 mb-1;
 
         a {
-            display: block;
+           @apply block;
         }
     }
 } 
