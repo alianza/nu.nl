@@ -2,13 +2,7 @@
 @import 'mixins/sizes';
 @import 'mixins/loader';
 @import 'mixins/links';
-
-body {
-    &.scroll-disabled {
-        overflow: hidden;
-        margin-right: 12px;
-    }
-}
+@import 'mixins/disable_scroll';
 
 #app {
     @import 'mixins/tooltip';
