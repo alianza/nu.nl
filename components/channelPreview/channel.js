@@ -24,7 +24,6 @@ export default function Channel({channel, openStory, linkToChannel}) {
         :
     <h1 className="text-2xl">{channel.title}</h1>;
 
-
     return (
         <div className="flex flex-col gap-4">
             <div className="flex flex-col items-center">
