@@ -5,12 +5,12 @@ import StoryDialog from "../../components/storyDialog/storyDialog"
 import Head from "next/head"
 
 export async function getStaticProps() {
-    const anders = await NuService.getAnders()
+    const algemeen = await NuService.getVoorpagina()
 
     return {
         props: {
             channels: [
-                anders
+                algemeen
             ],
             buildTime: new Date().toString()
         },
