@@ -5,6 +5,9 @@ const darkModeKey = "darkMode"
 
 export default function Header() {
     const [theme, setTheme] = useState('')
+    const isLightTheme = theme === 'light'
+    const title = `Change to ${isLightTheme ? "Dark" : "Light"} theme`
+    const themeIcon = isLightTheme ? "🌙" : "☀"
 
     useEffect(() => {
         const matchDarkMedia = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)')
@@ -21,6 +24,8 @@ export default function Header() {
 
             matchDarkMedia.addEventListener('change', onColorSchemeChange)
         }
+
+        return () => { matchDarkMedia.removeEventListener('change', onColorSchemeChange)}
     }, [theme])
 
     const changeTheme = () => {
@@ -32,9 +37,9 @@ export default function Header() {
 
     const onColorSchemeChange = (e) => { document.body.dataset.theme = e.matches ? 'dark' : 'light' } // Prefers light/dark theme
 
-    return <header className="fixed w-full h-header top-0 p-4 shadow flex justify-between items-center bg-accent-1 z-20 transition-colors">
-        <Link href='/'><a><h1 className="text-xl not-italic">Nu.nl Nieuws</h1></a></Link>
-        <button onClick={changeTheme} className="hover:scale-110 transition-transform p-4 m-[-1em]"
-                title={`Change to ${theme === "light" ? "Dark" : "Light"} theme`}>{theme === "light" ? "🌙" : "☀"}</button>
-    </header>
+    return (
+        <header className="fixed w-full h-header top-0 p-4 shadow flex justify-between items-center bg-accent-1 z-20 transition-colors">
+            <Link href='/'><a><h1 className="text-xl not-italic">Nu.nl Nieuws</h1></a></Link>
+            <button onClick={changeTheme} className="hover:scale-110 transition-transform p-4 -m-4" title={title}>{themeIcon}</button>
+        </header>)
 }

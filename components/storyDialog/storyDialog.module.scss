@@ -12,7 +12,7 @@
     background-attachment: local, local, scroll, scroll;
     background-size: 100% 39px, 100% 39px, 100% 24px, 100% 24px;
 
-    @apply fixed p-4 max-h-[90%] left-1/2 top-1/2 w-11/12 mobile:w-4/5 max-w-3xl bg-accent-1 rounded-lg shadow-lg overflow-auto z-30;
+    @apply fixed p-4 max-h-[90%] left-1/2 top-1/2 w-11/12 mobile:w-4/5 max-w-3xl bg-accent-1 rounded-lg shadow-lg overflow-auto z-30 shadow-xl;
 
     .title {
         @apply mt-0 text-white relative px-2 py-4 rounded z-10 bg-no-repeat bg-cover bg-center before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-black/50 before:z-[-1] before:rounded;

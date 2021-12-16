@@ -7,6 +7,12 @@ export default function StoryDialog({story, setStory}) {
     const [content, setContent] = useState(null)
     const [open, setOpen] = useState(false)
     const [currentPage] = useState(router.pathname)
+    const [visible, setVisible] = useState(false)
+    const transitionLength = 300
+
+    const transition = { transition: `opacity ${transitionLength}ms ease-out, visibility ${transitionLength}ms ease-out` }
+    const visibleStyle = { opacity: 1, visibility: 'visible', ...transition }
+    const hiddenStyle = { opacity: 0, visibility: 'hidden', ...transition }
 
     useEffect(() => {
         if (router.asPath.includes('?artikel=') && !story) {
@@ -71,25 +77,31 @@ export default function StoryDialog({story, setStory}) {
             }
         }
 
-        if (story) {
-            loadStory(story).then(() => {
-                setOpen(true)
-                document.body.classList.add('scroll-disabled')
-            })
-        }
+        if (story) { loadStory(story).then(() => { openStory() })}
     }, [story])
+
+    function openStory() {
+        setOpen(true) // Mount dialog before animation
+        setTimeout(() => {
+            setVisible(true)
+            document.body.classList.add('scroll-disabled')
+        }, 100)
+    }
 
     function closeStory(navigateBack = true) {
         if (navigateBack) { router.push(currentPage, undefined, { shallow: true }) }
-        setOpen(false)
-        setStory(null)
-        document.body.classList.remove('scroll-disabled')
+        setVisible(false) // Hide dialog before unmounting
+        setTimeout(() => {
+            setOpen(false)
+            setStory(null)
+            document.body.classList.remove('scroll-disabled')
+        }, transitionLength)
     }
 
     return ( <>
             {open &&  <>
-                <div className={`fixed inset-0 z-20 bg-black/50 text-text-primary cursor-pointer`} onClick={closeStory}/>
-                <div className={`${styles.dialog} -translate-y-1/2 -translate-x-1/2`}>
+                <div style={visible ? visibleStyle : hiddenStyle} className={`fixed inset-0 z-20 bg-black/50 text-text-primary cursor-pointer`} onClick={closeStory}/>
+                <div style={visible ? visibleStyle : hiddenStyle} className={`${styles.dialog} -translate-y-1/2 -translate-x-1/2`}>
                     <button className="block ml-auto -my-2 mb-2 transition-transform hover:scale-125 p-2" onClick={closeStory}>✕</button>
                     <div dangerouslySetInnerHTML={{__html: content.toString()}}/>
                 </div>
