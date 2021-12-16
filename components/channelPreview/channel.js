@@ -13,21 +13,17 @@ export default function Channel({channel, openStory, linkToChannel}) {
         formattedDate = `${formattedDate} om: ${formatTime(channelDate)}`
     }
 
-    const title = linkToChannel ?
-    <Link href={channelLink}>
-        <a className='relative group flex items-center'>
-            <span id={channel.title.replace('NU - ', '')} className="absolute -top-20"/>
-            <h1 className="text-2xl">{channel.title}</h1>
-            <span className='absolute -right-6 text-2xl transition-transform group-hover:translate-x-2'>→</span>
-        </a>
-    </Link>
-        :
-    <h1 className="text-2xl">{channel.title}</h1>;
-
     return (
         <div className="flex flex-col gap-4">
             <div className="flex flex-col items-center">
-                {title}
+                {linkToChannel ?
+                    <Link href={channelLink}>
+                        <a className='relative group flex items-center'>
+                            <span id={channel.title.replace('NU - ', '')} className="absolute -top-20"/>
+                            <h1 className="text-2xl">{channel.title}</h1>
+                            <span className='absolute -right-6 text-2xl transition-transform group-hover:translate-x-2'>→</span>
+                        </a>
+                    </Link> : <h1 className="text-2xl">{channel.title}</h1>}
                 <span className="text-accent-6"> Laatste data: {formattedDate}</span>
             </div>
 
