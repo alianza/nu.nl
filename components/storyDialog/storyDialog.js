@@ -13,8 +13,7 @@ export default function StoryDialog({story, unsetStory}) {
             if (e.includes('?artikel=')) {
                 document.querySelector(`a[href*='${e.substring(e.indexOf('?artikel=') + '?artikel='.length, e.length)}']`)?.click()
             } else {
-                setOpen(false)
-                document.body.classList.remove('scroll-disabled')
+                closeStory(false)
             }
         }
 
@@ -73,8 +72,8 @@ export default function StoryDialog({story, unsetStory}) {
         }
     }, [story])
 
-    function closeStory() {
-        router.push(currentPage, undefined, { shallow: true })
+    function closeStory(navigateBack = true) {
+        if (navigateBack) { router.push(currentPage, undefined, { shallow: true }) }
         setOpen(false)
         unsetStory(null)
         document.body.classList.remove('scroll-disabled')
