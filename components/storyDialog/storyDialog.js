@@ -2,15 +2,22 @@ import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import styles from "./storyDialog.module.scss"
 
-export default function StoryDialog({story, unsetStory}) {
+export default function StoryDialog({story, setStory}) {
     const router = useRouter()
     const [content, setContent] = useState(null)
     const [open, setOpen] = useState(false)
     const [currentPage] = useState(router.pathname)
 
     useEffect(() => {
+        if (router.asPath.includes('?artikel=') && !story) {
+            const href = router.asPath.substring(router.asPath.indexOf('?artikel=') + '?artikel='.length, router.asPath.length)
+            document.querySelector(`a[href*='${href}`)?.click()
+        }
+    }, [])
+
+    useEffect(() => {
         const handleRouteChange = (e) => {
-            if (e.includes('?artikel=')) {
+            if (e.includes('?artikel=') && !story) {
                 document.querySelector(`a[href*='${e.substring(e.indexOf('?artikel=') + '?artikel='.length, e.length)}']`)?.click()
             } else {
                 closeStory(false)
@@ -25,7 +32,7 @@ export default function StoryDialog({story, unsetStory}) {
     useEffect(() => {
         const loadStory = async (storyObj) => {
             if (!router.asPath.includes('?artikel=')) {
-                router.push(router.asPath + `?artikel=${new URL(storyObj.link).pathname}`, undefined, { shallow: true })
+                router.push(router.pathname + `?artikel=${new URL(storyObj.link).pathname}`, undefined, { shallow: true })
             }
 
             const storyHTML = await fetch(`https://whatever.fly.dev/get?url=${encodeURIComponent(storyObj.link)}`)
@@ -75,7 +82,7 @@ export default function StoryDialog({story, unsetStory}) {
     function closeStory(navigateBack = true) {
         if (navigateBack) { router.push(currentPage, undefined, { shallow: true }) }
         setOpen(false)
-        unsetStory(null)
+        setStory(null)
         document.body.classList.remove('scroll-disabled')
     }
 
@@ -83,7 +90,7 @@ export default function StoryDialog({story, unsetStory}) {
             {open &&  <>
                 <div className={`fixed inset-0 z-20 bg-black/50 text-text-primary cursor-pointer`} onClick={closeStory}/>
                 <div className={`${styles.dialog} -translate-y-1/2 -translate-x-1/2`}>
-                    <button className="block ml-auto mb-3 transition-transform hover:scale-125" onClick={closeStory}>✕</button>
+                    <button className="block ml-auto -my-2 mb-2 transition-transform hover:scale-125 p-2" onClick={closeStory}>✕</button>
                     <div dangerouslySetInnerHTML={{__html: content.toString()}}/>
                 </div>
             </>}

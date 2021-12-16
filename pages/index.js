@@ -50,7 +50,7 @@ export default function Home({ channels }) {
 
             {channels.map(channel => (<Channel key={channel.title} openStory={setStory} channel={channel} linkToChannel/>))}
 
-            <StoryDialog story={story} unsetStory={setStory}/>
+            <StoryDialog story={story} setStory={setStory}/>
 
         </div>
     )
