@@ -4,10 +4,15 @@ body {
         z-index: 20;
 
         .spinner {
-            top: .45em;
-            right: .15em;
+            top: .25em;
+            right: 0;
             padding: 1em;
             pointer-events: none;
+        }
+
+        .spinner-icon {
+            width: 24px;
+            height: 24px;
         }
     }
 }
