@@ -6,7 +6,7 @@ export default function StoryDialog({story, unsetStory}) {
     const router = useRouter()
     const [content, setContent] = useState(null)
     const [open, setOpen] = useState(false)
-    const [currentPage] = useState(router.asPath)
+    const [currentPage] = useState(router.pathname)
 
     useEffect(() => {
         const handleRouteChange = (e) => {
@@ -29,7 +29,7 @@ export default function StoryDialog({story, unsetStory}) {
                 router.push(router.asPath + `?artikel=${new URL(storyObj.link).pathname}`, undefined, { shallow: true })
             }
 
-            const storyHTML = await fetch('https://whatever.fly.dev/get?url=' + encodeURIComponent(storyObj.link))
+            const storyHTML = await fetch(`https://whatever.fly.dev/get?url=${encodeURIComponent(storyObj.link)}`)
                 .then(response => response.json())
                 .then(response => { return response })
 
@@ -50,6 +50,7 @@ export default function StoryDialog({story, unsetStory}) {
                 story.querySelectorAll('a[href^="/"]').forEach(e => { e.setAttribute('href', `https://nu.nl${e.getAttribute('href')}`) })
                 story.querySelectorAll('div.timeline-block-wrapper.banner_block').forEach(e => { e.remove() })
                 story.querySelectorAll('div.timeline-block-wrapper.video_block').forEach(e => { e.remove() })
+                story.querySelectorAll('div.twitter>:not(div.twitter)').forEach(e => { e.classList.add(styles.twitter) })
 
                 if (story?.firstElementChild) {
                     story.firstElementChild.insertAdjacentHTML('afterend' ,
@@ -75,8 +76,8 @@ export default function StoryDialog({story, unsetStory}) {
     function closeStory() {
         router.push(currentPage, undefined, { shallow: true })
         setOpen(false)
-        document.body.classList.remove('scroll-disabled')
         unsetStory(null)
+        document.body.classList.remove('scroll-disabled')
     }
 
     return ( <>
