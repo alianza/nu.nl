@@ -1,14 +1,16 @@
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import styles from "./storyDialog.module.scss"
+import Head from "next/head"
+
+const transitionLength = 300
 
 export default function StoryDialog({story, setStory}) {
     const router = useRouter()
     const [content, setContent] = useState(null)
     const [open, setOpen] = useState(false)
-    const [currentPage] = useState(router.pathname)
     const [visible, setVisible] = useState(false)
-    const transitionLength = 300
+    const currentPage = router.pathname
 
     const transition = { transition: `opacity ${transitionLength}ms ease-out, visibility ${transitionLength}ms ease-out` }
     const visibleStyle = { opacity: 1, visibility: 'visible', ...transition }
@@ -100,6 +102,9 @@ export default function StoryDialog({story, setStory}) {
 
     return ( <>
             {open &&  <>
+                <Head>
+                    <title>{story?.title}</title>
+                </Head>
                 <div style={visible ? visibleStyle : hiddenStyle} className={`fixed inset-0 z-20 bg-black/50 text-text-primary cursor-pointer`} onClick={closeStory}/>
                 <div style={visible ? visibleStyle : hiddenStyle} className={`${styles.dialog} -translate-y-1/2 -translate-x-1/2`}>
                     <button className="block ml-auto -my-2 mb-2 transition-transform hover:scale-125 p-2" onClick={closeStory}>✕</button>
