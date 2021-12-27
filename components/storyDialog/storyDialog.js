@@ -65,6 +65,7 @@ export default function StoryDialog({story, setStory}) {
                 story.querySelectorAll('div.timeline-block-wrapper.banner_block').forEach(e => { e.remove() })
                 story.querySelectorAll('div.timeline-block-wrapper.video_block').forEach(e => { e.remove() })
                 story.querySelectorAll('div.twitter>:not(div.twitter)').forEach(e => { e.classList.add(styles.twitter) })
+                story.querySelectorAll('div.component_container[data-component="article_login_wall"]').forEach(e => { e.remove() })
 
                 if (story?.firstElementChild) {
                     story.firstElementChild.insertAdjacentHTML('afterend' ,
