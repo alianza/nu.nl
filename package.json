@@ -14,7 +14,7 @@
     "next-pwa": "^5.4.0"
   },
   "devDependencies": {
-    "@netlify/plugin-nextjs": "4.1.0",
+    "@netlify/plugin-nextjs": "4.2.2",
     "autoprefixer": "^10.4.0",
     "postcss": "^8.4.5",
     "sass": "^1.43.4",
