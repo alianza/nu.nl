@@ -5,6 +5,8 @@ import Head from "next/head"
 
 const transitionLength = 300
 
+const baseUrl = 'https://whatever.fly.dev/'
+
 export default function StoryDialog({story, setStory}) {
     const router = useRouter()
     const [content, setContent] = useState(null)
@@ -43,7 +45,7 @@ export default function StoryDialog({story, setStory}) {
                 router.push(router.pathname + `?artikel=${new URL(storyObj.link).pathname}`, undefined, { shallow: true })
             }
 
-            const storyHTML = await fetch(`https://whatever.fly.dev/get?url=${encodeURIComponent(storyObj.link)}`)
+            const storyHTML = await fetch(`${baseUrl}get?url=${encodeURIComponent(storyObj.link)}`)
                 .then(response => response.json())
                 .then(response => { return response })
 
