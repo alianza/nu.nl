@@ -4,7 +4,7 @@ import { useState } from "react"
 import StoryDialog from "../components/storyDialog/storyDialog"
 import QuickTabs from "../components/quickTabs/quickTabs"
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const algemeen = await NuService.getVoorpagina('4')
     const anders = await NuService.getAlgemeen('4')
     const opmerkelijk = await NuService.getOpmerkelijk('4')
@@ -36,7 +36,6 @@ export async function getStaticProps() {
             ],
             buildTime: new Date().toString()
         },
-        revalidate: 120
     }
 }
 
