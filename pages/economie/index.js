@@ -14,7 +14,7 @@ export async function getStaticProps() {
             ],
             buildTime: new Date().toString()
         },
-        revalidate: 120
+        revalidate: 60
     }
 }
 
