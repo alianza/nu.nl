@@ -6,11 +6,15 @@ import { useEffect, useState } from "react"
 
 export default function Channel({channel, openStory, linkToChannel}) {
     const channelLink = channel.link.substring(channel.link.lastIndexOf('/'), channel.link.length)
-    const [date, setDate] = useState(formatDate(new Date(channel.lastBuildDate)))
+    const [date, setDate] = useState(null)
+
+    useEffect(() => setDate(formatDate(new Date(channel.lastBuildDate))), [])
 
     useEffect(() => {
-      if (!months.some(value => date.includes(value))) setDate(`${date} om: ${formatTime(new Date(channel.lastBuildDate))}`) // If date doesn't contain month name, add time
-    }, [])
+      if (date && !months.some(value => date.includes(value))) {
+        setDate(`${formatDate(new Date(channel.lastBuildDate))} om: ${formatTime(new Date(channel.lastBuildDate))}`)
+      }
+    }, [date])
 
     return (
         <div className="flex flex-col gap-4">

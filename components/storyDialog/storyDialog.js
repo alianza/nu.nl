@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import styles from "./storyDialog.module.scss"
 import Head from "next/head"
 import { StoryService } from "../../lib/services/storyService"
+import { formatDate, formatTime } from "../../lib/utils"
 
 const transitionLength = 300
 
@@ -11,6 +12,7 @@ export default function StoryDialog({story, setStory}) {
     const [content, setContent] = useState(null)
     const [open, setOpen] = useState(false)
     const [visible, setVisible] = useState(false)
+    const [date, setDate] = useState(null)
     const currentPage = router.pathname
 
     const transition = { transition: `opacity ${transitionLength}ms ease-out, visibility ${transitionLength}ms ease-out` }
@@ -72,6 +74,7 @@ export default function StoryDialog({story, setStory}) {
         if (story) {
             StoryService.transformStory(story, storyObj)
             setContent(story.innerHTML)
+            setDate(`${formatDate(story.pubDate)} om: ${formatTime(new Date(story.pubDate))}`)
         } else {
             setContent(`<h1 class='${styles.noContentFound}'>Geen content gevonden...</h1> <a href="${storyObj.link}" target="_blank" rel="noreferrer">Lees volledig bericht...</a>`)
         }
@@ -86,9 +89,11 @@ export default function StoryDialog({story, setStory}) {
                    className={`fixed inset-0 z-20 bg-black/50 text-text-primary cursor-pointer`} onClick={closeStory}/>
               <div style={visible ? visibleStyle : hiddenStyle}
                    className={`${styles.dialog} -translate-y-1/2 -translate-x-1/2`}>
-                  <button className="block ml-auto -my-2 mb-2 transition-transform hover:scale-125 p-2"
-                          onClick={closeStory}>✕
-                  </button>
+                <div className="flex justify-between items-center -mt-4">
+                  <span>{date}</span>
+                  <button className="transition-transform hover:scale-125 active:scale-95 p-4 -mr-2" onClick={closeStory}>✕</button>
+                </div>
+
                   <div dangerouslySetInnerHTML={{ __html: content.toString() }}/>
               </div>
           </>}

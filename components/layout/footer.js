@@ -1,9 +1,11 @@
 import { formatDate } from "../../lib/utils"
 import { formatTime } from "../../lib/utils"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 export default function Footer({ buildTime }) {
-  const [date] = useState(`${formatDate(new Date(buildTime))} om: ${formatTime(new Date(buildTime))}`)
+  const [date, setDate] = useState(null)
+
+  useEffect(() => setDate(`${formatDate(new Date(buildTime))} om: ${formatTime(new Date(buildTime))}`), [])
 
   return (
     <footer className="absolute w-full bottom-0 h-16 p-4 shadow-allround bg-accent-1 flex justify-between items-center">
