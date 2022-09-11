@@ -26,7 +26,7 @@ export default function Header() {
             matchDarkMedia.addEventListener('change', onColorSchemeChange)
         }
 
-        return () => { matchDarkMedia.removeEventListener('change', onColorSchemeChange)}
+        return () => matchDarkMedia.removeEventListener('change', onColorSchemeChange)
     }, [theme])
 
     const changeTheme = () => {

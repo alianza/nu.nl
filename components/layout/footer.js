@@ -1,5 +1,5 @@
-import { formatDate } from "../../lib/formatDate"
-import { formatTime } from "../../lib/formatTime"
+import { formatDate } from "../../lib/utils"
+import { formatTime } from "../../lib/utils"
 
 export default function Footer({buildTime}) {
     const buildTimeDate = new Date(buildTime)
