@@ -4,6 +4,8 @@ import { formatDate, months, transformTitle } from "../../lib/utils"
 import { formatTime } from "../../lib/utils"
 import { useEffect, useState } from "react"
 
+// https://github.com/vercel/next.js/discussions/38263#discussioncomment-3162871
+
 export default function Channel({channel, openStory, linkToChannel}) {
     const channelLink = channel.link.substring(channel.link.lastIndexOf('/'), channel.link.length)
     const [date, setDate] = useState(null)

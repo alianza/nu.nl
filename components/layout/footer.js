@@ -2,6 +2,8 @@ import { formatDate } from "../../lib/utils"
 import { formatTime } from "../../lib/utils"
 import { useEffect, useState } from "react"
 
+// https://github.com/vercel/next.js/discussions/38263#discussioncomment-3162871
+
 export default function Footer({ buildTime }) {
   const [date, setDate] = useState(null)
 

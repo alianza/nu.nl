@@ -7,6 +7,8 @@ import { formatDate, formatTime } from "../../lib/utils"
 
 const transitionLength = 300
 
+// https://github.com/vercel/next.js/discussions/38263#discussioncomment-3162871
+
 export default function StoryDialog({story, setStory}) {
     const router = useRouter()
     const [content, setContent] = useState(null)
