@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import Story from '../story/story'
-import { formatDate, months } from "../../lib/formatDate"
-import { formatTime } from "../../lib/formatTime"
+import { formatDate, months, transformTitle } from "../../lib/utils"
+import { formatTime } from "../../lib/utils"
 
 export default function Channel({channel, openStory, linkToChannel}) {
-    const channelLink = channel.link.substr(channel.link.lastIndexOf('/'), channel.link.length)
+    const channelLink = channel.link.substring(channel.link.lastIndexOf('/'), channel.link.length)
     const channelDate = new Date(channel.lastBuildDate)
 
     let formattedDate = formatDate(channelDate)
@@ -19,9 +19,9 @@ export default function Channel({channel, openStory, linkToChannel}) {
                 {linkToChannel ?
                     <Link href={channelLink}>
                         <a className='relative group flex items-center'>
-                            <span id={channel.title.replace('NU - ', '')} className="absolute -top-20"/>
+                            <span id={transformTitle(channel.title, true)} className="absolute -top-20"/>
                             <h1 className="text-2xl">{channel.title}</h1>
-                            <span className='absolute -right-6 text-2xl transition-transform group-hover:translate-x-2'>→</span>
+                            <span className='absolute w-6 -right-6 text-2xl text-right transition-all group-hover:w-8 group-hover:-right-8'>→</span>
                         </a>
                     </Link> : <h1 className="text-2xl">{channel.title}</h1>}
                 <span className="text-accent-6"> Laatste data: {formattedDate}</span>
