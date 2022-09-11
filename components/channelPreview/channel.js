@@ -2,16 +2,15 @@ import Link from 'next/link'
 import Story from '../story/story'
 import { formatDate, months, transformTitle } from "../../lib/utils"
 import { formatTime } from "../../lib/utils"
+import { useEffect, useState } from "react"
 
 export default function Channel({channel, openStory, linkToChannel}) {
     const channelLink = channel.link.substring(channel.link.lastIndexOf('/'), channel.link.length)
-    const channelDate = new Date(channel.lastBuildDate)
+    const [date, setDate] = useState(formatDate(new Date(channel.lastBuildDate)))
 
-    let formattedDate = formatDate(channelDate)
-
-    if (!months.some(value => formattedDate.includes(value))) { // If date doesn't contain month name, add time
-        formattedDate = `${formattedDate} om: ${formatTime(channelDate)}`
-    }
+    useEffect(() => {
+      if (!months.some(value => date.includes(value))) setDate(`${date} om: ${formatTime(new Date(channel.lastBuildDate))}`) // If date doesn't contain month name, add time
+    }, [])
 
     return (
         <div className="flex flex-col gap-4">
@@ -24,7 +23,7 @@ export default function Channel({channel, openStory, linkToChannel}) {
                             <span className='absolute w-6 -right-6 text-2xl text-right transition-all group-hover:w-8 group-hover:-right-8'>→</span>
                         </a>
                     </Link> : <h1 className="text-2xl">{channel.title}</h1>}
-                <span className="text-accent-6"> Laatste data: {formattedDate}</span>
+                <span className="text-accent-6"> Laatste data: {date}</span>
             </div>
 
             <ul className="flex flex-wrap justify-center gap-8 tablet:gap-4 w-full">

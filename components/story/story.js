@@ -1,10 +1,10 @@
 import { formatDate } from "../../lib/utils"
 import NewTabIcon from "../newTabIcon/newTabIcon"
 import { formatTime } from "../../lib/utils"
+import { useState } from "react"
 
 export default function Story({item, openStory}) {
-    const storyDate = new Date(item.pubDate)
-    const dateString = `${formatDate(item.pubDate)} om: ${formatTime(storyDate)}`
+    const [date] = useState(`${formatDate(item.pubDate)} om: ${formatTime(new Date(item.pubDate))}`)
 
     return(
         <li tabIndex='0' className="flex flex-col gap-2 flex-grow relative basis-64 rounded-lg outline-offset-4 outline-accent-6 focus:outline focus:outline-1 active:outline active:outline-1">
@@ -18,7 +18,7 @@ export default function Story({item, openStory}) {
                     <NewTabIcon className='absolute bottom-1 right-1 ml-auto p-2 invert transition-transform hover:scale-125'/>
                 </a>
             </div>
-            <span>{dateString}</span>
+            <span>{date}</span>
             <p className="text-sm"
                dangerouslySetInnerHTML={{
                    __html: !(item.description && Object.keys(item.description).length === 0) ?
