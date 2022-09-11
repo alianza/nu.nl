@@ -1,11 +1,10 @@
-const withPWA = require('next-pwa')
-
 const prod = process.env.NODE_ENV === 'production'
+const withPWA = require('next-pwa')({
+    dest: 'public',
+    disable: !prod,
+    buildExcludes: [/middleware-manifest\.json$/]
+})
 
 module.exports = withPWA({
-    pwa: {
-        dest: 'public',
-        disable: !prod,
-        buildExcludes: [/middleware-manifest\.json$/]
-    }
+    // next.js config
 })
