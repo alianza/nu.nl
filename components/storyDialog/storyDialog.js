@@ -85,7 +85,7 @@ export default function StoryDialog({ story, setStory }) {
 
         const { html } = await StoryService.fetchStory(storyObj.link);
         const doc = document.createRange().createContextualFragment(html);
-        let story = doc.querySelector('[data-type="article.body"]') || doc.querySelector("article.col-main");
+        let story = doc.querySelector('article.article') || doc.querySelector("article.col-main");
 
         if (story) {
             StoryService.transformStory(story, storyObj);
