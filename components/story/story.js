@@ -45,9 +45,6 @@ export default function Story({ item, openStory }) {
       <p
         className="text-sm"
         dangerouslySetInnerHTML={{
-          // __html: !(item.description && Object.keys(item.description).length === 0)
-          //   ? item.description?.toString()
-          //   : "Geen beschrijving...",
           __html: item.description && typeof item.description === "string" ? item.description : "Geen beschrijving...",
         }}
       />
